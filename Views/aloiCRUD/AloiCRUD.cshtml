@@ -1,0 +1,99 @@
+﻿
+@model aloiCRUDapp.Models.aloi_projdetails
+@{
+    ViewBag.Title = "AloiCRUD";
+}
+
+<style>
+    .error {
+        color: red;
+    }
+</style>
+
+@using (Html.BeginForm("Addnames", "AloiCRUD", FormMethod.Post))
+{
+
+    <h2>AloiCRUD</h2>
+    <div class="container">
+
+        <div class="form-group">
+            @Html.HiddenFor(x => x.ID)
+            <label>Name</label>
+            @Html.ValidationMessageFor(x => x.full_name, "", new { @class = "error" })
+            @Html.TextBoxFor(x => x.full_name, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            <label>Address</label>
+            @Html.TextBoxFor(x => x.opt_address, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            <label>Phone Number</label>
+            @Html.ValidationMessageFor(x => x.phone_number, "", new { @class = "error" })
+            @Html.TextBoxFor(x => x.phone_number, new { @class = "form-control" })
+        </div>
+
+
+        <!--Rdaio-Button-->
+        <div class="form-group">
+            <label>Fund Request</label>
+            @Html.ValidationMessageFor(x => x.fund_request, "", new { @class = "error" })
+            <label>Want to transact?</label>
+            <div id="r1">
+                <label>Yes</label>
+
+                @Html.RadioButtonFor(x => x.fund_request, "True")
+            </div>
+            <label>No</label>
+            <div id="r1">
+                @Html.RadioButtonFor(x => x.fund_request, "False", new { @disabled = "disabled" })
+            </div>
+
+            
+
+
+        </div>
+
+        <div class="form-group" id="t1">
+            <label>Fund Amount</label>
+            @Html.TextBoxFor(x => x.fund_amount, new { @class = "form-control", @id = "t1"});
+        </div>
+
+            <div>
+                <label>Fund Purpose</label>
+                @Html.ValidationMessageFor(x => x.fund_purpose, "", new { @class = "error" })
+                @Html.TextBoxFor(x => x.fund_purpose, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                <label>Business Type</label>
+                @Html.TextBoxFor(x => x.business_type, new { @class = "form-control" })
+            </div>
+        
+
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="reset" class="btn btn-danger">Reset</button>
+
+        </div>
+    </div>
+
+}
+
+
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"></script>
+<script language="javascript">
+    $(document).ready(function ($) {
+        $("input[ID='r1']").click(function () {
+            if ($(this).is(':checked')) {
+                $('#t1').attr("disabled", false);
+            }
+            else {
+                $('#t1').attr("disabled", true);
+            }
+        });
+    });
+</script>

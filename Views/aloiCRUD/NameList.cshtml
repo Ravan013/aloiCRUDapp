@@ -1,0 +1,59 @@
+﻿@model List<aloiCRUDapp.Models.aloi_projdetails>
+
+@{
+    ViewBag.Title = "NameList";
+}
+
+@using (Html.BeginForm("NameList", "aloiCRUD", FormMethod.Post))
+{
+
+    <div>
+        @Html.TextBox("Search")
+        <input type="submit" value="Search" />
+    </div>
+
+    <table class="table table-hover">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Phone Number</th>
+            <th>Fund Request</th>
+            <th>Fund Amount</th>
+            <th>Fund Purpose</th>
+            <th>Business Type</th>
+        </tr>
+
+        @{
+            if (Model.Count() == 0)
+            {
+
+                <tr>
+                    <td colspan="8" style="text-align:center; color: red"> NO DATA FOUND!!</td>
+                </tr>
+            }
+        }
+
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ID</td>
+                <td>@item.full_name</td>
+                <td>@item.opt_address</td>
+                <td>@item.phone_number</td>
+                <td>@item.fund_request</td>
+                <td>@item.fund_amount</td>
+                <td>@item.fund_purpose</td>
+                <td>@item.business_type</td>
+                <td>
+                    <a href="@Url.Action("AloiCRUD", new{item.ID, item.full_name, item.opt_address, item.phone_number, item.fund_request, item.fund_purpose, item.business_type})"><i class="glyphicon glyphicon-pencil"></i></a>
+
+                    <a href="@Url.Action("Delete", new{item.ID})"><i class="glyphicon glyphicon-trash"></i></a>
+                </td>
+            </tr>
+        }
+    </table>
+
+}
+
